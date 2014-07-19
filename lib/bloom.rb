@@ -55,7 +55,6 @@ module Bloom
       hash ^= k1
     end
 
-    p hash
     hash ^= key.length
     hash &= filter_32
     hash ^= (hash >> 16)
