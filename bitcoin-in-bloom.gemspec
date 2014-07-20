@@ -7,4 +7,5 @@ Gem::Specification.new do |s|
   s.authors = ["Alexander Gamble"]
   s.files = ['lib/bloom.rb']
   s.license = 'MIT'
+  s.add_development_dependency "rspec"
 end

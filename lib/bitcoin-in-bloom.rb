@@ -1,4 +1,42 @@
-module Bloom
+class Bloom
+  attr_reader :bit_field, :nHash, :nTweak, :size
+
+  MAX_SIZE = 36000
+
+  def initialize(elements, false_positive_rate=0.01, nHash=10)
+    @nTweak = SecureRandom.hex.to_i
+
+    @size = ([( -1 * elements * Math.log(false_positive_rate)) / (Math.log(2) ** 2),
+              MAX_SIZE * 8].min / 8).floor
+
+    @nHash = ((size * 8 * Math.log(2)) / elements).to_i
+
+    @bit_field = Array.new(size, 0)
+
+  end
+
+  def in_range(variable, lower, upper)
+    if variable > upper || variable < lower
+      return false
+    end
+    true
+  end
+
+  def hash(data, nHashNum)
+    murmurhash3(data, nHashNum * 0xFBA4C795 + @nTweak)
+  end
+
+  def insert(data)
+    for i in 1..nHash do
+      hash = hash(data, i)
+
+      bit_field[hash >> 3] |= (1 << (7 & hash))
+      puts 1
+      puts bit_field.length
+      puts (hash >> 3)
+    end
+  end
+
   def murmurhash3(key, seed)
     c1 = 0xcc9e2d51
     c2 = 0x1b873593
