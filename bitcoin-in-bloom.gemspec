@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.date = '2014-07-28'
   s.summary = "A mechanism to build Bitcoin bloom filters"
   s.authors = ["Alexander Gamble"]
-  s.files = ['lib/bloom.rb']
+  s.files = ['lib/bitcoin-in-bloom.rb']
   s.license = 'MIT'
   s.add_development_dependency "rspec"
 end
